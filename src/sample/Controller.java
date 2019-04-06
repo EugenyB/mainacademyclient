@@ -14,6 +14,8 @@ import java.util.List;
 public class Controller {
 
     @FXML
+    private TextField messageField;
+    @FXML
     private Button friendListButton;
     @FXML
     private Button enterButton;
@@ -47,5 +49,12 @@ public class Controller {
 
     public void showOnlineFriends() {
         st.showFriendsOnline();
+    }
+
+    public void sendMessage() {
+        String text = messageField.getText();
+        User user = userList.getSelectionModel().getSelectedItem();
+        st.sendTo(user,text);
+        messageField.clear();
     }
 }

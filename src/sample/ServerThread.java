@@ -56,8 +56,9 @@ public class ServerThread extends Thread {
         String line;
         while ((line=reader.readLine())!=null) {
             // 1 - обычное сообщение от другого клиента
-            //TODO обработать и отобразить сообщение
-
+            if (line.startsWith(">>>")) {
+                System.out.println(line);
+            } else
             // 2 - сообщение от сервера
             if ("<<<".equals(line)) {
                 List<User> users = new ArrayList<>();
@@ -80,5 +81,9 @@ public class ServerThread extends Thread {
 
     public void showFriendsOnline() {
         writer.println("<<<");
+    }
+
+    public void sendTo(User user, String text) {
+        writer.println(String.format(">>>%s;%s;%s", user.getLogin(), login, text));
     }
 }
